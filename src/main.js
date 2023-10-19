@@ -6,6 +6,6 @@ document
     e.preventDefault();
     const repoName = document.getElementById("search").value;
     const data = await getRepoDetails(repoName);
-    //document.getElementById("repoInfo").style.display="block";
+    document.getElementById("repoInfo").style.display="block";
     updateUI(data);
   });

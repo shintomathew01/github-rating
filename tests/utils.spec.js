@@ -53,15 +53,32 @@ describe("utils", () => {
       stargazers_count: 10,
     };
 
+    test("It should update UI if repository not found", () => {
+      const dataNotFound={
+        message:"Not Found"
+      };
+      updateUI(dataNotFound);
+      const expectedResult = `<div class="flex items-center space-x-4">Sorry the searched repository is not found</div>
+  `;
+      expect(elm.innerHTML.replace(/\s+/g, " ").trim()).toBe(
+        expectedResult.replace(/\s+/g, " ").trim()
+      );
+    });
+
     test("It should update UI", () => {
       updateUI(data);
-      const expectedResult = `
-      <h2>Repository: ${data.name}</h2>
-      <p>Author: ${data.owner.login}</p>
-      <img src="${data.owner.avatar_url}" alt="Author's Avatar" width="100">
-      <p>Stars: ${data.stargazers_count}</p>
-      <p>Forks: ${data.forks_count}</p>
-      <p>Popularity: Not Popular</p>
+      const expectedResult = ` <div class="flex items-center space-x-4">
+      <img src="${data.owner.avatar_url}" alt="Author's Avatar" class="w-16 h-16 rounded-full">
+      <div>
+          <h2 class="text-lg font-semibold">Repository: ${data.name}</h2>
+          <p  class="text-gray-600">Author: <span class="font-semibold">${data.owner.login}</span></p>
+      </div>
+  </div>
+  <div class="mt-4">
+      <p>Stars: <span class="font-semibold">${data.stargazers_count}</span></p>
+      <p>Forks: <span class="font-semibold">${data.forks_count}</span></p>
+      <p>Popularity: <span class="font-semibold">Not Popular</span></p>
+  </div>
   `;
       expect(elm.innerHTML.replace(/\s+/g, " ").trim()).toBe(
         expectedResult.replace(/\s+/g, " ").trim()
@@ -73,12 +90,18 @@ describe("utils", () => {
       data.stargazers_count = 900;
       updateUI(data);
       const expectedResult = `
-      <h2>Repository: ${data.name}</h2>
-      <p>Author: ${data.owner.login}</p>
-      <img src="${data.owner.avatar_url}" alt="Author's Avatar" width="100">
-      <p>Stars: ${data.stargazers_count}</p>
-      <p>Forks: ${data.forks_count}</p>
-      <p>Popularity: Popular</p>
+      <div class="flex items-center space-x-4">
+      <img src="${data.owner.avatar_url}" alt="Author's Avatar" class="w-16 h-16 rounded-full">
+      <div>
+          <h2 class="text-lg font-semibold">Repository: ${data.name}</h2>
+          <p  class="text-gray-600">Author: <span class="font-semibold">${data.owner.login}</span></p>
+      </div>
+  </div>
+  <div class="mt-4">
+      <p>Stars: <span class="font-semibold">${data.stargazers_count}</span></p>
+      <p>Forks: <span class="font-semibold">${data.forks_count}</span></p>
+      <p>Popularity: <span class="font-semibold">Popular</span></p>
+  </div>
   `;
       expect(elm.innerHTML.replace(/\s+/g, " ").trim()).toBe(
         expectedResult.replace(/\s+/g, " ").trim()

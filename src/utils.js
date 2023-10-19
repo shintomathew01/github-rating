@@ -15,7 +15,7 @@ export async function getRepoDetails(repoName) {
 
 export function updateUI(data) {
 
-  document.getElementById("repoInfo").style.display="block";
+  
   const repoInfo = document.getElementById("repoInfo");
 
   // Display the data information in case not found
