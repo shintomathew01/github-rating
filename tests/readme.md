@@ -1,5 +1,7 @@
 # Github Rating
 
+Single page application to check the popularity of the github repository by providing github name
+
 ## Usage
 
 #### Install package
